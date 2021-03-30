@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">InstaBlind</string>
+    <string name="insta_blind">Insta Blind</string>
+    <string name="username">UserName</string>
+    <string name="password">Password</string>
+    <string name="log_in">Log In</string>
+    <string name="don_t_an_account_sign_up"> Sign up ?</string>
 </resources>
