@@ -4,10 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Layout;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -20,6 +22,7 @@ import com.google.android.gms.tasks.Task;
 
 public class MainActivity extends AppCompatActivity {
     private Button login;
+    private Button next;
     private EditText username;
     private EditText password;
     private SignInButton signin;
@@ -69,8 +72,31 @@ public class MainActivity extends AppCompatActivity {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
 
             // Signed in successfully, show authenticated UI.
-            Intent intent=new Intent(this,HomePage.class);
-            startActivity(intent);
+            UpdateUI();
+            next =(Button)findViewById(R.id.next);
+            next.setOnClickListener(v -> {
+                if(v.getId()==R.id.next){
+                    Log.d("success","button recognized");
+                    //validation de password
+                    EditText passwordtxt=findViewById(R.id.editTextTextPassword2);
+                    Log.d("pass_saisie",passwordtxt.getText().toString());
+                    if(passwordtxt.getText().toString().equals("fuckoff3")){
+                        Log.d("success","password fine");
+                        //go to home page
+                        Intent intent=new Intent(this,HomePage.class);
+                        intent.putExtra("password",passwordtxt.getText().toString());
+                        startActivity(intent);
+                    }
+                    else Log.d("failure","password  not fine");
+
+
+
+
+                }
+            });
+
+
+
 
         } catch (ApiException e) {
             // The ApiException status code indicates the detailed failure reason.
@@ -93,5 +119,12 @@ public class MainActivity extends AppCompatActivity {
          if(usernameInput.equals("azerty") && passwordInput.equals("23"))   Log.d("success","u have logged in");
          else Log.d("failure","u have not logged in");
 
+    }
+    private void UpdateUI(){
+        LinearLayout layout=findViewById(R.id.NewPassword);
+        LinearLayout loginform=findViewById(R.id.LoginForm);
+        signin.setVisibility(View.INVISIBLE);
+        loginform.setVisibility(View.INVISIBLE);
+        layout.setVisibility(View.VISIBLE);
     }
 }
