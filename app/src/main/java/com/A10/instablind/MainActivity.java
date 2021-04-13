@@ -11,27 +11,42 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.speech.RecognizerIntent;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final int REQUEST_CODE_SPEECH_INPUT = 1000;
     static int REQUESTCODE = 1;
     ImageView selectedImage;
+    EditText DetectedDescription;
+
     static int PreqCode = 1;
     Uri pickedImgUri;
+    private boolean BlindIsTrue = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        DetectedDescription = findViewById(R.id.DetectedDescription);
         selectedImage=findViewById(R.id.image_added);
+        if(BlindIsTrue){
+            speak();
+        }
+
         selectedImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(Build.VERSION.SDK_INT >=22){
+                if(Build.VERSION.SDK_INT >= 22){
 
                 checkAndRequestForPermission();
                 }
@@ -41,6 +56,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void speak() {
+        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
+        try{
+            startActivityForResult(intent,REQUEST_CODE_SPEECH_INPUT);
+
+        }catch (Exception e){
+            Toast.makeText(this,""+e.getMessage(),Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void openGallery() {
@@ -71,6 +97,15 @@ public class MainActivity extends AppCompatActivity {
         if(resultCode == RESULT_OK && requestCode == REQUESTCODE && data !=null){
             pickedImgUri = data.getData();
             selectedImage.setImageURI(pickedImgUri);
+
+        }
+        switch (requestCode){
+            case REQUEST_CODE_SPEECH_INPUT:{
+                if (resultCode == RESULT_OK && null !=data){
+                    ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+                    DetectedDescription.setText(result.get(0));
+                }
+            }
         }
     }
 }
