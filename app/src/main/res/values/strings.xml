@@ -1,8 +1,8 @@
 <resources>
-    <string name="app_name">InstaBlind</string>
-    <string name="insta_blind">Insta Blind</string>
-    <string name="username">UserName</string>
-    <string name="password">Password</string>
-    <string name="log_in">Log In</string>
-    <string name="don_t_an_account_sign_up"> Sign up ?</string>
+    <string name="app_name">Instagram</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="settings">Settings</string>
+    <string name="log_out">Log-Out</string>
 </resources>
