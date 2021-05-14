@@ -2,4 +2,9 @@
     <string name="app_name">InstaBlind</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="image_for_logo">image for logo</string>
+    <string name="image_for_inbox">image for inbox</string>
+
+    <string name="settings">Settings</string>
+    <string name="log_out">Log-Out</string>
 </resources>
