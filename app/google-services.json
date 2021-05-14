@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1021378003798",
+    "project_id": "insta-blind",
+    "storage_bucket": "insta-blind.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1021378003798:android:6e79fac1432ef2d54b4cf7",
+        "android_client_info": {
+          "package_name": "com.A10.instablind"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1021378003798-1knttr1ub99hc4r123rso3p25jjhmsch.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOAXgVNtHMqAF1m-xHU-OIarpLpbMQtZk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1021378003798-1knttr1ub99hc4r123rso3p25jjhmsch.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
