@@ -75,7 +75,7 @@ public class StartActivity extends AppCompatActivity {
 
         }
     }
-/*
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -84,5 +84,5 @@ public class StartActivity extends AppCompatActivity {
             startActivity(new Intent(StartActivity.this , MainActivity.class));
             finish();
         }
-    }*/
+    }
 }
