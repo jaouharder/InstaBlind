@@ -48,8 +48,12 @@ dependencies {
     implementation 'com.rengwuxian.materialedittext:library:2.1.4'
 
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation fileTree(dir: 'C:\\OpenCv\\opencv\\build\\java', include: ['*.aar', '*.jar'], exclude: [])
+    implementation fileTree(dir: 'C:\\Users\\hpcode\\Desktop', include: ['*.aar', '*.jar'], exclude: [])
+    implementation project(path: ':libopencv')
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
 }
 apply plugin: 'com.google.gms.google-services'

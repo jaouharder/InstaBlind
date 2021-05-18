@@ -1,2 +1,3 @@
+include ':libopencv'
 include ':app'
 rootProject.name = "InstaBlind"
