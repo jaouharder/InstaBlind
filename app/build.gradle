@@ -45,6 +45,9 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation 'com.squareup.picasso:picasso:2.71828'
 
+    // Use this dependency to bundle the model with your app
+    implementation 'com.google.mlkit:image-labeling:17.0.3'
+
     implementation "com.hendraanggrian.appcompat:socialview:0.2"
     implementation "com.hendraanggrian.appcompat:socialview-commons:0.2"
     implementation 'com.theartofdev.edmodo:android-image-cropper:2.8.0'

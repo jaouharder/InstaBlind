@@ -1,5 +1,8 @@
 package com.A10.instablind.Model;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public class Post {
 
     private String description;
@@ -48,4 +51,6 @@ public class Post {
     public void setPublisher(String publisher) {
         this.publisher = publisher;
     }
+
+
 }
