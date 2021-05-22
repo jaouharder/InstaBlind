@@ -106,11 +106,30 @@ public class PostActivity extends AppCompatActivity {
             }).addOnCompleteListener(new OnCompleteListener<Uri>() {
                 @Override
                 public void onComplete(@NonNull Task<Uri> task) {
+
                     Uri downloadUri = task.getResult();
                     imageUrl = downloadUri.toString();
 
+                    //in this step we call  the GetImageContent() to get object list
+                    ArrayList<String> content= GetImageContent(imageUri);
+
+                    //we display the list to check its content
+                    for(String item : content){
+                        System.err.println("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh\nhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
+                        System.err.println(item);
+                        Log.i("item",item);
+                    }
+
                     DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Posts");
+                    DatabaseReference ref1 = FirebaseDatabase.getInstance().getReference("objets");
                     String postId = ref.push().getKey();
+
+                    ArrayList<String> list1=new ArrayList<>();
+                    list1.add("amine");
+                    list1.add("benettaleb");
+                    list1.add(postId);
+
+                    content.add(postId);
 
                     HashMap<String, Object> map = new HashMap<>();
                     map.put("postid" , postId);
@@ -118,16 +137,12 @@ public class PostActivity extends AppCompatActivity {
                     map.put("description" , description.getText().toString());
                     map.put("publisher" , FirebaseAuth.getInstance().getCurrentUser().getUid());
 
-                    //in this step we call  the GetImageContent() to get object list
-                    ArrayList<String> content= GetImageContent(imageUri);
-
-                    //we display the list to check its content
-                    for(String item : content){
-                        System.err.println(item);
-                        Log.i("item",item);
-                    }
-
                     ref.child(postId).setValue(map);
+                    ref1.child(postId).setValue(content);
+
+
+
+
 
                     DatabaseReference mHashTagRef = FirebaseDatabase.getInstance().getReference().child("HashTags");
                     List<String> hashTags = description.getHashtags();
@@ -166,7 +181,8 @@ public class PostActivity extends AppCompatActivity {
 
         InputImage image =null;
         List<String> arraylabels=new ArrayList<>();
-       /* Uri imageUri = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE +
+/*
+       Uri imageUri = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE +
                 "://" + getResources().getResourcePackageName(R.drawable.opencv_dnn)
                 + '/' + getResources().getResourceTypeName(R.drawable.opencv_dnn) + '/' + getResources().getResourceEntryName(R.drawable.opencv_dnn) );
 */
@@ -203,7 +219,14 @@ public class PostActivity extends AppCompatActivity {
                         arraylabels.add("no object detected");
                     }
                 });
+        for(String item : arraylabels){
+            System.err.println("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh\nhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
+            System.err.println(item);
+            Log.i("item",item);
+        }
         return (ArrayList<String>) arraylabels;
+
+
     }
 
     private String getFileExtension(Uri uri) {
