@@ -10,7 +10,6 @@ public class Post {
     private String postid;
     private String publisher;
 
-
     public Post() {
     }
 
@@ -20,7 +19,6 @@ public class Post {
         this.postid = postid;
         this.publisher = publisher;
     }
-
 
     public String getDescription() {
         return description;
