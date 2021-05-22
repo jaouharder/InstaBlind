@@ -119,13 +119,8 @@ public class PostActivity extends AppCompatActivity {
                     map.put("publisher" , FirebaseAuth.getInstance().getCurrentUser().getUid());
 
                     //in this step we call  the GetImageContent() to get object list
-                    ArrayList<String> content= GetImageContent(imageUri);
+                    GetImageContent(imageUri,postId);
 
-                    //we display the list to check its content
-                    for(String item : content){
-                        System.err.println(item);
-                        Log.i("item",item);
-                    }
 
                     ref.child(postId).setValue(map);
 
@@ -162,7 +157,7 @@ public class PostActivity extends AppCompatActivity {
 
     /***
      * this method take Uri image like input and gives the list of the objects of the image */
-    private ArrayList<String> GetImageContent(Uri uri){
+    private void GetImageContent(Uri uri,String postId){
 
         InputImage image =null;
         List<String> arraylabels=new ArrayList<>();
@@ -192,6 +187,10 @@ public class PostActivity extends AppCompatActivity {
                             int index = label.getIndex();
 
                         }
+                        System.err.println("arraaaaaaaaaaaaaaaaaylllllllllllllllllaaaaabls "+arraylabels);
+                        DatabaseReference ref1 = FirebaseDatabase.getInstance().getReference("objects");
+                        arraylabels.add(postId);
+                        ref1.child(postId).setValue(arraylabels);
 
                     }
                 })
@@ -203,7 +202,6 @@ public class PostActivity extends AppCompatActivity {
                         arraylabels.add("no object detected");
                     }
                 });
-        return (ArrayList<String>) arraylabels;
     }
 
     private String getFileExtension(Uri uri) {
