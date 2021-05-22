@@ -55,6 +55,7 @@ public class PostActivity extends AppCompatActivity {
     private ImageView imageAdded;
     private TextView post;
     SocialAutoCompleteTextView description;
+    private ArrayList<String> arraylabels=new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,13 +120,13 @@ public class PostActivity extends AppCompatActivity {
                     map.put("publisher" , FirebaseAuth.getInstance().getCurrentUser().getUid());
 
                     //in this step we call  the GetImageContent() to get object list
-                    ArrayList<String> content= GetImageContent(imageUri);
+                    GetImageContent(imageUri);
 
                     //we display the list to check its content
-                    for(String item : content){
-                        System.err.println(item);
-                        Log.i("item",item);
-                    }
+                    //U should save arraylabels in firebase
+                    System.err.println("arrayLabelssssssssssssss : "+arraylabels);
+
+                    System.err.println("salllllllllllllllllllllllllllllllllllllllllllam : ");
 
                     ref.child(postId).setValue(map);
 
@@ -162,10 +163,10 @@ public class PostActivity extends AppCompatActivity {
 
     /***
      * this method take Uri image like input and gives the list of the objects of the image */
-    private ArrayList<String> GetImageContent(Uri uri){
+    private void GetImageContent(Uri uri){
 
         InputImage image =null;
-        List<String> arraylabels=new ArrayList<>();
+
        /* Uri imageUri = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE +
                 "://" + getResources().getResourcePackageName(R.drawable.opencv_dnn)
                 + '/' + getResources().getResourceTypeName(R.drawable.opencv_dnn) + '/' + getResources().getResourceEntryName(R.drawable.opencv_dnn) );
@@ -187,12 +188,12 @@ public class PostActivity extends AppCompatActivity {
                         System.err.println("wa dkheellllllllllllllllll "+labels.toString());
                         Log.i("obj",labels.toString());
                         for (ImageLabel label : labels) {
+                           // System.err.println("elemennnnnnnnnnnnnnnnnnnnt "+label.getText());
                             arraylabels.add(label.getText());
                             float confidence = label.getConfidence();
                             int index = label.getIndex();
-
                         }
-
+                        System.err.println("arraylabelsssssss11111111111 "+arraylabels);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -203,7 +204,8 @@ public class PostActivity extends AppCompatActivity {
                         arraylabels.add("no object detected");
                     }
                 });
-        return (ArrayList<String>) arraylabels;
+
+        return ;
     }
 
     private String getFileExtension(Uri uri) {
