@@ -84,7 +84,10 @@ public class PostActivity extends AppCompatActivity {
         CropImage.activity().start(com.A10.instablind.PostActivity.this);
     }
 
+
+
     private void upload() {
+
 
         final ProgressDialog pd = new ProgressDialog(this);
         pd.setMessage("Uploading");

@@ -214,7 +214,7 @@ public class PostAdapter extends RecyclerView.Adapter<com.A10.instablind.Adapter
             like = itemView.findViewById(R.id.like);
             comment = itemView.findViewById(R.id.comment);
             save = itemView.findViewById(R.id.save);
-            more = itemView.findViewById(R.id.more);
+            //more = itemView.findViewById(R.id.more);
 
             username = itemView.findViewById(R.id.username);
             noOfLikes = itemView.findViewById(R.id.no_of_likes);
