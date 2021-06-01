@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ToggleModeActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/Theme.InstaBlind.AppBarOverlay"/>
+
+    <include
+        android:id="@+id/include"
+        layout="@layout/content_toggle_mode" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="216dp"
+        android:layout_height="137dp"
+        android:layout_marginStart="100dp"
+        android:src="@drawable/instablinlogo"
+        app:layout_anchor="@+id/include"
+        app:layout_anchorGravity="center"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/toggle_tittle"
+        android:layout_width="211dp"
+        android:layout_height="69dp"
+        android:text="Blind mode toggle"
+        android:textSize="24sp"
+        app:layout_anchorGravity="center_horizontal" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
