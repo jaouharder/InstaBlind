@@ -3,7 +3,6 @@ package com.A10.instablind.Fragment;
 import android.os.Bundle;
 import android.os.Handler;
 import android.speech.tts.TextToSpeech;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +22,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
@@ -76,7 +76,9 @@ public class HomeFragment extends Fragment {
     }
 
     private void postDialogue() {
-        for (Post post : postList) {
+        ArrayList<Post> posts = new ArrayList<>(postList);
+        Collections.reverse(posts);
+        for (Post post : posts) {
             getContent(post.getPostid());
         }
     }
@@ -88,9 +90,8 @@ public class HomeFragment extends Fragment {
                 objectList= (ArrayList<String>)dataSnapshot.getValue();
                 textToSpeech.speak("a post contains the following", TextToSpeech.QUEUE_ADD, null, "toggle");
 
-                for (int i = objectList.size()-1; i > 0 ; i--) {
+                for (int i = objectList.size()-2; i > 0 ; i--) {
                     String object = objectList.get(i);
-//                for (String object : objectList) {
                     textToSpeech.speak(object, TextToSpeech.QUEUE_ADD, null, "toggle");
                 }
 
@@ -147,13 +148,5 @@ public class HomeFragment extends Fragment {
 
             }
         });
-
-//        final Handler handler = new Handler();
-//        handler.postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                postDialogue();  //speak after 2000ms
-//            }
-//        }, 2000);
     }
 }
