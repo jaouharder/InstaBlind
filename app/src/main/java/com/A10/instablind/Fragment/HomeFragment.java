@@ -1,7 +1,9 @@
 package com.A10.instablind.Fragment;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.speech.tts.TextToSpeech;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class HomeFragment extends Fragment {
 
@@ -53,46 +56,51 @@ public class HomeFragment extends Fragment {
         checkFollowingUsers();
 
 
-//        textToSpeech = new TextToSpeech(getContext(), new TextToSpeech.OnInitListener() {
-//            @Override
-//            public void onInit(int status) {
-//                if(status != TextToSpeech.ERROR) {
-//                    textToSpeech.setLanguage(Locale.US);
-//                }
-//            }
-//        });
-//        objectList = new ArrayList<>();
+        textToSpeech = new TextToSpeech(getContext(), new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if(status != TextToSpeech.ERROR) {
+                    textToSpeech.setLanguage(Locale.US);
+                }
+            }
+        });
+        objectList = new ArrayList<>();
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                postDialogue();  //speak after 2000ms
+            }
+        }, 5000);
         return view;
     }
 
-//    private void postDialogue() {
-//        for (Post post : postList) {
-//            getContent(post.getPostid());
-//            if (objectList==null) continue;
-//            Log.println(Log.ERROR, "OBJECTS", String.valueOf(objectList));
-//            Log.println(Log.ERROR, "USER", String.valueOf(post.getPublisher()));
-//
-//            textToSpeech.speak("post by " + post.getPublisher() + "contains the following", TextToSpeech.QUEUE_FLUSH, null, "toggle");
-//
-//            for (String object : objectList) {
-//                textToSpeech.speak(object, TextToSpeech.QUEUE_FLUSH, null, "toggle");
-//            }
-//            objectList.clear();
-//        }
-//    }
+    private void postDialogue() {
+        for (Post post : postList) {
+            getContent(post.getPostid());
+        }
+    }
 
-//    public void getContent(String postId) {
-//        FirebaseDatabase.getInstance().getReference().child("objects").child(postId).addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                objectList= (ArrayList<String>)dataSnapshot.getValue();
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//            }
-//        });
-//    }
+    public void getContent(String postId) {
+        FirebaseDatabase.getInstance().getReference().child("objects").child(postId).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                objectList= (ArrayList<String>)dataSnapshot.getValue();
+                textToSpeech.speak("a post contains the following", TextToSpeech.QUEUE_ADD, null, "toggle");
+
+                for (int i = objectList.size()-1; i > 0 ; i--) {
+                    String object = objectList.get(i);
+//                for (String object : objectList) {
+                    textToSpeech.speak(object, TextToSpeech.QUEUE_ADD, null, "toggle");
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+    }
 
     private void checkFollowingUsers() {
 

@@ -193,6 +193,8 @@ public class StartActivity extends AppCompatActivity {
     }
 
     private void startDialogue() {
+        if (FirebaseAuth.getInstance().getCurrentUser() != null)
+            return;
         String toSpeak = "press the screen and hold to turn your mic on, " +
                 "use, login, to login to an account, " +
                 "use, register, to create a new account";

@@ -20,7 +20,7 @@
         android:layout_width="216dp"
         android:layout_height="137dp"
         android:layout_marginStart="100dp"
-        android:src="@drawable/instablinlogo"
+        android:src="@drawable/instablindlogo"
         app:layout_anchor="@+id/include"
         app:layout_anchorGravity="center"
         tools:ignore="ContentDescription" />
